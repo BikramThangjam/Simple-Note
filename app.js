@@ -62,7 +62,7 @@ function showNotes(){
         //console.log("element: ",element);
         html += `
             <div class="noteCard card d-flex flex-column" style="width: 18rem;">
-                <div class="card-body position-relative mb-2">
+                <div class="card-body position-relative">
                     <h5 class="card-title text-dark">${index + 1}. ${element.title}</h5>
                     <p class="card-text text-dark cut-text">${element.text}</p>
                     
@@ -113,7 +113,7 @@ search.addEventListener('input',function(){
     Array.from(noteCards).forEach(function(element){
         //console.log(element);
         let cardTxt = element.getElementsByTagName("p")[0].innerText;
-        console.log(cardTxt);
+        //console.log(cardTxt);
         //console.log(cardTxt);  
         if(cardTxt.includes(inputvalue)){
             element.style.display = "block";
