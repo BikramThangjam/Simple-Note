@@ -1,4 +1,4 @@
-console.log("Welcome to Magic Notes App!");
+
 //if user adds a note, add it to local storage
 
 showNotes(); //As the page loads, it shows all the notes.
@@ -7,49 +7,72 @@ showNotes(); //As the page loads, it shows all the notes.
 let addNoteBtn = document.getElementById("addNoteBtn");
 
 addNoteBtn.addEventListener("click", (e)=>{
-   
+    //To add the notes created time
+    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const m = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sep","Oct","Nov","Dec"];
+    const d = new Date();
+    let day = weekday[d.getDay()];
+    let month = m[d.getMonth()];
+    let date = d.getDate();
+    let year = d.getFullYear();
+
     let addText = document.getElementById("addText");
     let addTitle = document.getElementById("addTitle");
     let notes = localStorage.getItem("notes");
     if(notes == null){
-        notesObj = [];
+        notesArrOfObj = [];
     }else{
-        notesObj = JSON.parse(notes);
+        notesArrOfObj = JSON.parse(notes);
     }
 
-    let myObj = {
+    let currentObj = {
         title: addTitle.value,
-        text: addText.value
+        text: addText.value,
+        day: day,
+        month: month,
+        date: date,
+        year: year
     }
 
-    notesObj.push(myObj);
-    localStorage.setItem("notes", JSON.stringify(notesObj));
+    notesArrOfObj.push(currentObj);
+
+    localStorage.setItem("notes", JSON.stringify(notesArrOfObj));
     addText.value = "";
     addTitle.value ="";
-    // console.log(myObj);
-    // console.log(notesObj);
+    // console.log(currentObj);
+    // console.log(notesArrOfObj);
     showNotes();
 })
 
 
 //function to show elements from Local Storage
 function showNotes(){
+
     let notes = localStorage.getItem("notes");
+
     if(notes == null){
-        notesObj = [];
+        notesArrOfObj = [];
     }else{
-        notesObj = JSON.parse(notes);
+        notesArrOfObj = JSON.parse(notes);
     }
 
+    
     let html = "";
-    notesObj.forEach((element, index)=> {
+    notesArrOfObj.forEach((element, index)=> {
         //console.log("element: ",element);
         html += `
-            <div class="noteCard card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">${index + 1}. ${element.title}</h5>
-                    <p class="card-text">${element.text}</p>
-                    <button class="btn btn-primary" id="${index}" onclick="deleteNote(this.id)">Delete Note</button>
+            <div class="noteCard card d-flex flex-column" style="width: 18rem;">
+                <div class="card-body position-relative mb-2">
+                    <h5 class="card-title text-dark">${index + 1}. ${element.title}</h5>
+                    <p class="card-text text-dark cut-text">${element.text}</p>
+                    
+                    <button class="btn btn-success position-absolute bottom-0 " id="${index}" onclick="deleteNote(this.id)">Delete Note</button>
+                    
+                    
+                </div>
+                <hr class="text-dark mb-0"/>
+                <div class="d-flex justify-content-start p-2">           
+                    <span class="fs-6 fw-light fst-italic text-secondary text-nowrap ">${element.day} ${element.month} ${element.date}, ${element.year}</span>                             
                 </div>
             </div>                
         `;
@@ -57,7 +80,7 @@ function showNotes(){
     });
 
     let notesEle = document.getElementById("notes");
-    if(notesObj.length != 0 ){
+    if(notesArrOfObj.length != 0 ){
         notesEle.innerHTML = html;
     }else{
         notesEle.innerHTML = `Nothing to show! Use "Add a Note" section above to add notes. `;
@@ -70,13 +93,13 @@ function deleteNote(index){
     console.log('Deleting ', index);
     let notes = localStorage.getItem("notes");
     if(notes == null){
-        notesObj = [];
+        notesArrOfObj = [];
     }else{
-        notesObj = JSON.parse(notes); //converting data from string to JS object, Local Storage only contains string text. 
+        notesArrOfObj = JSON.parse(notes); //converting data from string to JS object, Local Storage only contains string text. 
     }
 
-    notesObj.splice(index, 1); //splice(start index, no. of element to remove)
-    localStorage.setItem("notes", JSON.stringify(notesObj)); //Updating local storage
+    notesArrOfObj.splice(index, 1); //splice(start index, no. of element to remove)
+    localStorage.setItem("notes", JSON.stringify(notesArrOfObj)); //Updating local storage
     showNotes();
 }
 
@@ -84,11 +107,13 @@ function deleteNote(index){
 let search = document.getElementById('searchTxt');
 search.addEventListener('input',function(){
     let inputvalue = search.value.toLowerCase();
-    //console.log("Input event fired", inputvalue);
+    //console.log("Input event fired: ", inputvalue);
     let noteCards = document.getElementsByClassName("noteCard");
    
     Array.from(noteCards).forEach(function(element){
+        //console.log(element);
         let cardTxt = element.getElementsByTagName("p")[0].innerText;
+        console.log(cardTxt);
         //console.log(cardTxt);  
         if(cardTxt.includes(inputvalue)){
             element.style.display = "block";

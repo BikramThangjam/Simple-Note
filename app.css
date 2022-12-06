@@ -1,0 +1,10 @@
+.noteCard{
+    height: 350px;
+}
+.cut-text {
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical; 
+    overflow: hidden;
+}
