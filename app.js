@@ -63,7 +63,7 @@ function showNotes(){
         html += `
             <div class="noteCard card d-flex flex-column" style="width: 18rem;">
                 <div class="card-body position-relative">
-                    <h5 class="card-title text-dark">${index + 1}. ${element.title}</h5>
+                    <h5 class="card-title text-dark cut-title">${index + 1}. ${element.title}</h5>
                     <p class="card-text text-dark cut-text">${element.text}</p>
                     
                     <button class="btn btn-success position-absolute bottom-0 " id="${index}" onclick="deleteNote(this.id)">Delete Note</button>
