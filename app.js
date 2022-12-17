@@ -40,12 +40,12 @@ function showNotes(){
     }
     
     if(notesArrOfObj.length !== 0 ){
-
+        let divTag = "";
         notesArrOfObj.forEach((element, index)=> {
             //console.log("element: ",element);
             currentTitle = element.title;
             currentDesc = element.description;
-            let divTag = `
+             divTag += `
                 <div class="noteCard card d-flex flex-column" style="width: 18rem;">
                     <div class="card-body position-relative">
                         <h5 class="card-title text-dark cut-title">${currentTitle}</h5>
@@ -62,10 +62,12 @@ function showNotes(){
                     </div>
                 </div>                
             `;
-            notesEle.insertAdjacentHTML("afterbegin", divTag);
+            //notesEle.insertAdjacentHTML("afterbegin", divTag);
         });
 
-    }else{
+        notesEle.innerHTML = divTag
+
+    }else {
         notesEle.innerHTML = `Nothing to show! Use "Add a Note" section above to add notes. `;
     }
 }
