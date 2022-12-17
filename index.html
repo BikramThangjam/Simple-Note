@@ -7,7 +7,8 @@
     <title>Simple Note</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-        <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="app.css">
     </head>
 
 <body class="bg-dark ">
@@ -32,7 +33,27 @@
             </div>
         </div>
     </nav>
-
+    <div class="popup-box">
+        <div class="popup">
+          <div class="content">
+            <header>
+              <p>Update a note</p>
+              <i class="uil uil-times"></i>
+            </header>
+            <form action="#">
+              <div class="row title">
+                <label>Title</label>
+                <input id="popup-titleInput" type="text" spellcheck="false">
+              </div>
+              <div class="row description">
+                <label>Description</label>
+                <textarea id="popup-textarea" spellcheck="false"></textarea>
+              </div>
+              <button class="update-btn">Update Note</button>
+            </form>
+          </div>
+        </div>
+      </div>
     <div class="container my-3">
         <h1 class="text-center mb-4 mt-4 text-light ">Let's start taking note!</h1>
         <div class="card bg-light w-50 mx-auto">
@@ -43,7 +64,7 @@
                 </div>
                 <h5 class="card-title">Description</h5>
                 <div class="mb-3">
-                    <textarea required class="form-control" id="addText" rows="3" placeholder="Add the notes here..."></textarea>
+                    <textarea required class="form-control" id="addDescription" rows="3" placeholder="Add the notes here..."></textarea>
                 </div>
                 <a href="#" id="addNoteBtn" class="btn btn-success">Add Note</a>
             </div>
@@ -51,7 +72,7 @@
         <hr class="text-light mt-5"/>
         <h1 class="text-light">Your Notes</h1>
         <hr />
-        <div id="notes" class="row container-fluid gap-3 text-light">
+        <div id="divNotes" class="row container-fluid gap-3 text-light">
             <!-- Notes are populating here via app.js   -->
         </div>
     </div>
