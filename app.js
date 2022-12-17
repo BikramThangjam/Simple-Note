@@ -46,20 +46,19 @@ function showNotes(){
             currentTitle = element.title;
             currentDesc = element.description;
              divTag += `
-                <div class="noteCard card d-flex flex-column" style="width: 18rem;">
-                    <div class="card-body position-relative">
-                        <h5 class="card-title text-dark cut-title">${currentTitle}</h5>
-                        <p class="card-text text-dark cut-text">${element.description}</p>
-                        <div class="d-flex gap-3 position-absolute bottom-0">
-                        <button class="btn btn-success  " id="${index}" onclick="deleteNote(${index})">Delete Note</button>
-                        <button class="btn btn-success  " id="${index}" onclick='updateNote(${index}, "${currentTitle}", "${currentDesc}")'>Update Note</button>
-                        </div>
-                        
-                    </div>
-                    <hr class="text-dark mb-0"/>
+                <div class="noteCard mx-auto card d-flex flex-column" style="width: 18rem;">
                     <div class="d-flex justify-content-start p-2">           
                         <span class="fs-6 fw-light fst-italic text-secondary text-nowrap ">${element.day} ${element.month} ${element.date}, ${element.year}</span>                             
                     </div>
+                    <hr class="text-dark"/>
+                    <div class="card-body position-relative">
+                        <h5 class="card-title text-dark cut-title">${currentTitle}</h5>
+                        <p class="card-text text-dark cut-text">${element.description}</p>
+                        <div class="d-flex gap-3 position-absolute bottom-0 mb-3">
+                            <button class="btn btn-success  " id="${index}" onclick="deleteNote(${index})">Delete Note</button>
+                            <button class="btn btn-success  " id="${index}" onclick='updateNote(${index}, "${currentTitle}", "${currentDesc}")'>Update Note</button>
+                        </div>                        
+                    </div>                   
                 </div>                
             `;
             //notesEle.insertAdjacentHTML("afterbegin", divTag);

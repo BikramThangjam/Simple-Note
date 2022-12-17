@@ -140,5 +140,8 @@
     .popup-box .popup{
       max-width: calc(100% - 15px);
     }
+    .card{
+      width: 100%;
+    }
   }
 /*  */
